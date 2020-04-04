@@ -1,0 +1,15 @@
+@import '../../grid';
+
+.notification {
+    padding: 3 * $grid-unit 3 * $grid-unit;
+    font-size: 5 * $grid-unit;
+    color: #EEEEEE;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    &.error {
+        background-color: #f70909;
+    }
+}

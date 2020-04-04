@@ -1,0 +1,45 @@
+@import '../../grid';
+
+.search-bar {
+    background-color: #FFE600;
+
+    & .img-logo {
+        height: 8 * $grid-unit;
+        width: auto;
+        position: absolute;
+    }
+
+    & .search-bar-input {
+        border: solid 0px;
+        border-radius: 3px 0 0 3px;
+        height: 8 * $grid-unit;
+        text-indent: 2  * $grid-unit;
+        color: #333333;
+        font-size: 18px;
+
+        &::placeholder {
+            color: #999999;
+        }
+        
+        &:focus {
+            outline-width: 0;
+        }
+    }
+
+    & .search-bar-button {
+        background-color: #EEEEEE;
+        border: 0;
+        border-radius: 0 3px 3px 0;
+        outline: 0;
+        padding-left: 3  * $grid-unit;
+        padding-right: 3  * $grid-unit;
+
+        & .icon {
+            background: url("../../assets/ic_Search@2x.png.png") no-repeat;
+            background-size: 4 * $grid-unit 4 * $grid-unit;
+            padding-bottom: $grid-unit;
+            padding-left: 3 * $grid-unit;
+            padding-right: $grid-unit;
+        }
+    }
+}
