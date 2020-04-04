@@ -6,6 +6,7 @@ import {
   getItemDescription as getItemDescriptionApi
 } from '../api/items';
 import { getAuthorDataById } from './authors';
+import { getCategory } from './categories';
 import {
   transformApiSearchToResponseFormat,
   transformApiItemToResponseFormat
@@ -20,13 +21,14 @@ export const getItem = async({
     if (isEmpty(id)) {
       return {};
     }
-
-    const [item, description] = await Promise.all(
-      [
-        getItemApi(id),
-        getItemDescriptionApi(id)
-      ]
-    );
+    const item = await getItemApi(id);
+    let description;
+    try {
+      description = await getItemDescriptionApi(id);
+    } catch {
+      // eslint-disable-next-line
+      console.log('No description');
+    }
     const {
       sellerId,
       ...transformedItem
@@ -43,7 +45,12 @@ export const getItem = async({
       },
       author: {
         nickname
-      }
+      },
+      categories: (
+        await getCategory(item.category_id)
+      ).path_from_root.map(
+        ({ name: catName }) => catName
+      )
     };
   } catch (e) {
     const error = new Error('Not able to fetch MELI');

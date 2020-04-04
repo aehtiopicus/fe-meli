@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb-base"],
+  "extends": ["airbnb-base", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
@@ -7,12 +7,15 @@
       "experimentalObjectRestSpread": true
     }
   },
-  "plugins": ["babel"],
+  "plugins": ["babel", "jsx-a11y", "react"],
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "browser": true
   },
   "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
     "babel/new-cap": 0,
     "babel/no-invalid-this": 0,
     "babel/object-curly-spacing": 0,
@@ -201,6 +204,8 @@
     "waitsFor": false,
     "worker": false,
     "wsh": false,
-    "yui": false
+    "yui": false,
+    "document": false,
+    "fetch": false
   }
 }

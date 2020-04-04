@@ -1,0 +1,49 @@
+@import '../../../grid';
+
+.item-main-content {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+
+    & .first-column {
+        & .img-container {
+            max-width: 170 * $grid-unit;
+            max-height:  170 * $grid-unit;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        & .description-disclaimer {
+            font-size: 4 * $grid-unit;
+            color: #999999;
+        }
+
+        & .description-title {
+            font-size: 7 * $grid-unit;
+        }
+    }
+
+    & .second-column {
+        display: flex;
+        flex-direction: column;
+
+        & .item-price {
+            font-size: 46px;
+            & .item-price-cents {
+                vertical-align: text-top;
+                font-size: 0.6em;
+                bottom: 0.25em;
+                font-weight: 100;
+            }
+        }
+        & .item-title {
+            font-size: 24px;
+        }
+        & .item-buy {
+            background-color: #3483fa;
+            font-size: 20px;
+            height: 9 * $grid-unit;
+            color: #ffffff;
+        }
+    }
+}

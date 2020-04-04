@@ -1,0 +1,76 @@
+$grid-unit: 4px;
+$padding: 'padding';
+$padding-short: 'pad';
+$margin: 'margin';
+$margin-short: 'mar';
+
+@mixin responsive-grid($responsive-size, $num-cols) {
+    @for $i from 1 through ($num-cols) {
+        $selector: #{$responsive-size}-#{$i}-#{$num-cols};
+        .meli-#{$selector} {
+            width: 100% * $i/$num-cols;
+        }
+    }
+}
+
+@mixin responsive-grid-offsite($responsive-size, $num-cols) {
+    @for $i from 1 through ($num-cols) {
+        $selector: #{$responsive-size}-#{$i}-#{$num-cols};
+        .meli-#{$selector}-left {
+            padding-left: 100% * $i/$num-cols;
+        }
+        .meli-#{$selector}-right {
+            padding-right: 100% * $i/$num-cols;
+        }
+    }
+}
+
+@mixin responsive-grid-aliased($responsive-size) {
+    @include responsive-grid($responsive-size, 12);
+    @include responsive-grid($responsive-size, 9);
+    @include responsive-grid($responsive-size, 8);
+    @include responsive-grid($responsive-size, 4);
+    @include responsive-grid($responsive-size, 3);
+    @include responsive-grid($responsive-size, 2);
+    @include responsive-grid($responsive-size, 1);
+}
+
+@mixin responsive-grid-offsite-padding($responsive-size) {
+    @include responsive-grid-offsite($responsive-size, 12);
+    @include responsive-grid-offsite($responsive-size, 9);
+    @include responsive-grid-offsite($responsive-size, 8);
+    @include responsive-grid-offsite($responsive-size, 4);
+    @include responsive-grid-offsite($responsive-size, 3);
+    @include responsive-grid-offsite($responsive-size, 2);
+    @include responsive-grid-offsite($responsive-size, 1);
+}
+
+@mixin responsive-space($cols-multiplier, $space-name, $space-short) {
+    .meli-l-#{$space-short}-top-#{$cols-multiplier} {
+        #{$space-name}-top: $grid-unit * $cols-multiplier;
+    }
+    .meli-l-#{$space-short}-left-#{$cols-multiplier} {
+        #{$space-name}-left: $grid-unit * $cols-multiplier;
+    }
+    .meli-l-#{$space-short}-right-#{$cols-multiplier} {
+        #{$space-name}-right: $grid-unit * $cols-multiplier;
+    }
+    .meli-l-#{$space-short}-bot-#{$cols-multiplier} {
+        #{$space-name}-bottom: $grid-unit * $cols-multiplier;
+    }
+    .meli-l-#{$space-short}-ver-#{$cols-multiplier} {
+        #{$space-name}-top: $grid-unit * $cols-multiplier;
+        #{$space-name}-bottom: $grid-unit * $cols-multiplier;
+    }
+    .meli-l-#{$space-short}-hor-#{$cols-multiplier} {
+        #{$space-name}-right: $grid-unit * $cols-multiplier;
+        #{$space-name}-left: $grid-unit * $cols-multiplier;
+    }
+}
+
+@mixin responsive-grid-spaces() {
+    @for $i from 1 through (10) {
+        @include responsive-space($i, $padding, $padding-short);
+        @include responsive-space($i, $margin, $margin-short);
+    }
+}

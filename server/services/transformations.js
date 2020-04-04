@@ -2,6 +2,25 @@ import isEmpty from 'lodash/isEmpty';
 
 import { CATEGORY_ID } from './constants';
 
+const transformToPrettyPicture = (picture) => (
+  picture.split('-').map(
+    (current, index, ro) => (
+      index === ro.length - 1 ?
+        current.replace('I.', 'O.') :
+        current
+    )
+  ).join('-')
+);
+
+const getCategories = (filters) => (
+  (
+    filters.find(
+      ({ id }) => id === CATEGORY_ID
+    ) ||
+    { values: [{ path_from_root: [] }] }
+  ).values[0].path_from_root.map(({ name: catName }) => catName)
+);
+
 export const transformApiItemToResponseFormat = ({
   id,
   title,
@@ -16,36 +35,35 @@ export const transformApiItemToResponseFormat = ({
     id: sellerId
   } = {},
   seller_id,
-  pictures
+  pictures,
+  address: {
+    state_name: address
+  } = {}
 }) => ({
   id,
   title,
   price: {
     currency,
-    amount: price,
+    amount: parseInt(price, 10),
     decimals: parseFloat(parseFloat(price % 1).toFixed(2))
   },
-  picture: !isEmpty(pictures) ? pictures[0].url : picture,
+  picture: transformToPrettyPicture(
+    !isEmpty(pictures) ? pictures[0].url : picture
+  ),
   condition,
   free_shipping,
-  sellerId: seller_id || sellerId
+  sellerId: seller_id || sellerId,
+  address
 });
-
-const getCategories = (filters) => (
-  (filters.find(
-    ({ id }) => id === CATEGORY_ID
-  ) ||
-  { values: [] }).values.map(({ name }) => name)
-);
 
 export const transformApiSearchToResponseFormat = ({
   results,
-  available_filters = []
+  filters = []
 } = {}) => (
   isEmpty(results) ?
     {} :
     {
       items: results.map(transformApiItemToResponseFormat),
-      categories: getCategories(available_filters)
+      categories: getCategories(filters)
     }
 );
