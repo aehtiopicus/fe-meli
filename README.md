@@ -18,3 +18,6 @@ yarn build
 ```script
 yarn be
 ```
+
+## Testing -> 
+`Missing test`
