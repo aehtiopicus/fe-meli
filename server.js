@@ -40,17 +40,19 @@ app.use(logger({
   meta: false,
   statusLevels: true
 }));
+app.use(express.static(path.join(__dirname, 'build')));
+
 app.use('/api', apiRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 handle(app);
 
 app.use(errorLogger({
   winstonInstance: logging
 }));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 const server = app.listen(process.env.PORT, () => {
   const serverAddress = server.address();

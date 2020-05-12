@@ -31,7 +31,7 @@ export default class SearchBar extends PureComponent {
     const { search } = this.state;
 
     return (
-      <section className="meli-cell meli-cell-1-1 meli-l-pad-ver-1 meli-l-pad-hor-10 search-bar">
+      <section className="meli-cell meli-cell-1-1 meli-l-pad-ver-1 search-bar">
         <div className="meli-offsite-1-12-left meli-offsite-1-12-right img-logo-container">
           <img src={meliLogo} className="img-logo"/>
           <div className="meli-l-mar-left-10 meli-l-pad-left-10">
