@@ -1,11 +1,11 @@
 /* eslint complexity: ["error", 7] */
 import Boom from 'boom';
 
-const createError = (status, definedError, additionalData) => {
+const createError = (errStatus, definedError = '', additionalData) => {
   const error = {
-    message: definedError.message,
-    status,
-    internalCode: definedError.code,
+    message: definedError.message || definedError,
+    status: errStatus,
+    internalCode: definedError.code || definedError,
     info: additionalData ? additionalData.toString() : null,
     handled: true
   };
